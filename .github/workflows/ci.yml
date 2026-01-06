@@ -28,19 +28,29 @@ jobs:
 
       - name: Run app in DEV environment
         run: |
+          echo "Starting DEV environment"
           SPRING_PROFILES_ACTIVE=dev java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8081/health
-
+          echo "DEV /health response:"
+          curl -s http://localhost:8081/health | tee dev-health.json
+          grep '"environment":"dev"' dev-health.json
+      
       - name: Run app in TEST environment
         run: |
+          echo "Starting TEST environment"
           SPRING_PROFILES_ACTIVE=test java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8082/health
-
+          echo "TEST /health response:"
+          curl -s http://localhost:8082/health | tee test-health.json
+          grep '"environment":"test"' test-health.json
+      
       - name: Run app in PROD environment
         run: |
+          echo "Starting PROD environment"
           SPRING_PROFILES_ACTIVE=prod java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8083/health
+          echo "PROD /health response:"
+          curl -s http://localhost:8083/health | tee prod-health.json
+          grep '"environment":"prod"' prod-health.json
+
 
