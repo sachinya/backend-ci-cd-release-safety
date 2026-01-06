@@ -20,8 +20,8 @@ jobs:
           java-version: 17
 
       - name: Build application
-        run: mvn clean package
-
+        run: mvn -B -U -Dmaven.repo.local=/tmp/m2 clean package
+        
       - name: Build container image
         run: |
           docker build -t backend-ci-cd:${{ github.sha }} .
