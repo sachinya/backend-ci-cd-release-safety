@@ -3,5 +3,8 @@ spring:
     activate:
       on-profile: prod
 
+server:
+  port: 8083
+
 app:
   environment: prod

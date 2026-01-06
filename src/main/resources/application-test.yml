@@ -3,5 +3,8 @@ spring:
     activate:
       on-profile: test
 
+server:
+  port: 8082
+
 app:
   environment: test

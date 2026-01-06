@@ -30,16 +30,17 @@ jobs:
         run: |
           SPRING_PROFILES_ACTIVE=dev java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8080/health
+          curl http://localhost:8081/health
 
       - name: Run app in TEST environment
         run: |
           SPRING_PROFILES_ACTIVE=test java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8080/health
+          curl http://localhost:8082/health
 
       - name: Run app in PROD environment
         run: |
           SPRING_PROFILES_ACTIVE=prod java -jar target/*.jar &
           sleep 10
-          curl http://localhost:8080/health
+          curl http://localhost:8083/health
+
