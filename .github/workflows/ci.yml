@@ -25,3 +25,21 @@ jobs:
       - name: Build container image
         run: |
           docker build -t backend-ci-cd:${{ github.sha }} .
+
+      - name: Run app in DEV environment
+        run: |
+          SPRING_PROFILES_ACTIVE=dev java -jar target/*.jar &
+          sleep 10
+          curl http://localhost:8080/health
+
+      - name: Run app in TEST environment
+        run: |
+          SPRING_PROFILES_ACTIVE=test java -jar target/*.jar &
+          sleep 10
+          curl http://localhost:8080/health
+
+      - name: Run app in PROD environment
+        run: |
+          SPRING_PROFILES_ACTIVE=prod java -jar target/*.jar &
+          sleep 10
+          curl http://localhost:8080/health
